@@ -1,0 +1,8 @@
+### Signup Request
+### Signup Request
+POST http://localhost:5001/api/auth/logout
+Content-Type: application/json
+
+{
+ 
+}
