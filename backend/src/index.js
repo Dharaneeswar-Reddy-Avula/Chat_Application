@@ -8,7 +8,8 @@ import cors from"cors"
 import {app,server} from "./lib/socket.js"
 import path from "path"
 
-dotenv.config()
+dotenv.config();
+const PORT = process.env.PORT;
 app.use(express.json({ limit: "10mb" }))
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(cookieParser())
@@ -20,18 +21,16 @@ const __dirname=path.resolve();
 app.use('/api/auth', authRoutes)
 app.use('/api/messages', MessageRoutes)
 
-// if(process.env.NODE_ENV==="production"){
-//     app.use(express.static(path.join(__dirname,"../frontend/dist")));
-//     app.get("*",(req,res)=>{
-//         res.sendFile(path.join(__dirname,"../frontend","dist","index.html"))
-//     })
-// }
 if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "../frontend/dist")));
+    const __dirname = path.resolve(); // Make sure this line is defined at top-level
+
+    app.use(express.static(path.join(__dirname, "frontend", "dist")));
+
     app.get("*", (req, res) => {
-        res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+        res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
     });
 }
+
 
 server.listen(PORT,()=>{
     console.log(`server is running at the port ${PORT}`);
