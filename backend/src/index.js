@@ -8,7 +8,8 @@ import cors from"cors"
 import {app,server,io} from "./lib/socket.js"
 import path from "path"
 
-dotenv.config()
+dotenv.config();
+const PORT = process.env.PORT;
 app.use(express.json({ limit: "10mb" }))
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(cookieParser())
