@@ -20,15 +20,15 @@ app.use(cors({
 app.use('/api/auth', authRoutes)
 app.use('/api/messages', MessageRoutes)
 
-// if (process.env.NODE_ENV === "production") {
-//     const __dirname = path.resolve(); // Make sure this line is defined at top-level
+if (process.env.NODE_ENV === "production") {
+    const __dirname = path.resolve(); // Make sure this line is defined at top-level
 
-//     app.use(express.static(path.join(__dirname, "frontend", "dist")));
+    app.use(express.static(path.join(__dirname, "frontend", "dist")));
 
-//     app.get("*", (req, res) => {
-//         res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
-//     });
-// }
+    app.get("*", (req, res) => {
+        res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+    });
+}
 
 
 server.listen(PORT,()=>{
